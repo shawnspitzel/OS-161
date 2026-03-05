@@ -60,3 +60,17 @@ void thread_exit(void)
 	panic("braaaaaaaiiiiiiiiiiinssssss\n");
 }
 ``` 
+## Part B:
+### Files Changed:
+    - None. I simply imported #lib.h, used the kprintf function, and printed it out within as3.c.
+### Source Code:
+```C
+// as3.c
+#include <stdio.h>
+#include <lib.h>
+
+int printint(int c){
+    kprintf("%d", c);
+    return c % 5 == 0;
+}
+```
