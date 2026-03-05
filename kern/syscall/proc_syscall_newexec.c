@@ -195,14 +195,14 @@ void sys_exit(int exitcode){
 	//kprintf("PID %d Signaling Parent PID %d to wake up \n", curproc->proc_id, curproc->parent_id);
 	cv_signal(curproc->cv, curproc->lock);
 	lock_release(curproc->lock);
-	thread_exit();
+	thread_exit(0);
 	} else {
 		//kprintf("No Parent waiting for PID %d, now destroying it \n", curproc->proc_id);
 		lock_release(curproc->lock);
 		//proc_destroy(curproc);
 		//proc_table[i] = NULL;
 		//kprintf("After proc destroy \n");
-		thread_exit();
+		thread_exit(0);
 	}
 }
 

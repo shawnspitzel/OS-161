@@ -417,7 +417,7 @@ cpu_hatch(unsigned software_number)
 	cpu_identify(buf, sizeof(buf));
 
 	V(cpu_startup_sem);
-	thread_exit();
+	thread_exit(0);
 }
 
 /*
@@ -781,7 +781,7 @@ thread_startup(void (*entrypoint)(void *data1, unsigned long data2),
 	entrypoint(data1, data2);
 
 	/* Done. */
-	thread_exit();
+	thread_exit(0);
 }
 
 /*
@@ -800,8 +800,7 @@ thread_startup(void (*entrypoint)(void *data1, unsigned long data2),
  *
  * Does not return.
  */
-void
-thread_exit(void)
+void thread_exit(void)
 {
 	struct thread *cur;
 
@@ -830,6 +829,7 @@ thread_exit(void)
 	/* Interrupts off on this processor */
 	splhigh();
 	thread_switch(S_ZOMBIE, NULL, NULL);
+	printf("%d", exitCode); // print out our exit code
 	panic("braaaaaaaiiiiiiiiiiinssssss\n");
 }
 

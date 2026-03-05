@@ -138,7 +138,7 @@ kill_curthread(vaddr_t epc, unsigned code, vaddr_t vaddr)
         //kprintf("PID %d Signaling Parent PID %d to wake up \n", curproc->proc_id, curproc->parent_id);
         cv_signal(curproc->cv, curproc->lock);
         lock_release(curproc->lock);
-        thread_exit();
+        thread_exit(0);
 
 	/* Changes for crash all test end*/
 

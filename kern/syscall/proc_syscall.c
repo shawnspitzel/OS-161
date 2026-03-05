@@ -193,7 +193,7 @@ void sys_exit(int exitcode){
 	KASSERT(curproc->exit_code == proc_table[i]->exit_code);
 	cv_signal(curproc->cv, curproc->lock);
 	lock_release(curproc->lock);
-	thread_exit();
+	thread_exit(exitcode);
 }
 
 int sys_getpid(pid_t *curproc_pid) {
